@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show Products</title>
+</head>
+<body>
+<div>
+    <h2 class="display-2">Product List</h2>
+    <hr>
+    <a th:href="@{/ProductCtrl/generateBill}">Generate Bill</a>
+    <table>
+        <thead>
+        <tr>
+            <td>Product Name</td>
+            <td>Product Category</td>
+            <td>Product Price</td>
+            <td>Add To Cart</td>
+        </tr>
+        </thead>
+        <tr th:each="tempProduct : ${products}">
+            <td th:text="${tempProduct.getProductName()}"></td>
+            <td th:text="${tempProduct.getCategory()}"></td>
+            <td th:text="${tempProduct.getProductPrice()}"></td>
+            <td>
+                    <form th:action="@{|/ProductCtrl/addProductToCart/${tempProduct.getProductId()}|}" method="post">
+                        <button type="submit">Add To Cart</button>
+                    </form>
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
